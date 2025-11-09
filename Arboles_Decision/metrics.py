@@ -31,64 +31,109 @@ evuelva un diccionario con:
 Usa random_state=42 en DecisionTreeClassifier para reproducibilidad.
 Prueba la función con el dataset Iris, asegurando que el modelo tenga al menos 85% de precisión en los datos de prueba.
 
+
+Precision (Precisión)
+
+Qué mide: De todas las veces que el modelo dijo “esta muestra es de la clase X”, cuántas veces acertó.
+
+Ejemplo:
+
+Supongamos que el modelo predijo 10 flores como Setosa, pero solo 8 eran realmente Setosa.
+Precision = 8 / 10 = 0.8 → 80% de las predicciones para Setosa fueron correctas.
+
+Recall (Sensibilidad o Exhaustividad)
+
+Qué mide: De todas las muestras que realmente son de la clase X, cuántas el modelo detectó correctamente.
+
+Ejemplo:
+
+Hay 12 flores que son realmente Setosa. El modelo predijo correctamente 8 de ellas.
+Recall = 8 / 12 ≈ 0.67 → Detectó el 67% de las Setosa reales.
+
+F1-score
+
+Qué mide: Es un promedio que combina precision y recall, para dar una sola métrica balanceada.
+
+Ejemplo:
+
+Con el ejemplo anterior, precision = 0.8 y recall = 0.67
+F1 ≈ 2 * (0.8*0.67)/(0.8+0.67) ≈ 0.73 → Una sola medida que resume el desempeño.
+
+4️⃣ Support (Soporte)
+
+Qué mide: Cuántas muestras reales hay de cada clase.
+Ejemplo: Si hay 12 flores Setosa, 10 Versicolor y 8 Virginica, el support nos dice eso para cada clase.
+
+💡 Resumiendo:
+
+-Precision: ¿De todas mis predicciones, cuántas fueron correctas?
+-Recall: ¿De todas las muestras reales, cuántas detecté correctamente?
+-F1-score: Balance entre precision y recall.
+-Support: Cuántas muestras de esa clase había.
+
 """
 
 
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier  # Para crear árboles de decisión
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report  # Para evaluar el modelo
+from sklearn.datasets import load_iris  # Dataset de ejemplo
+from sklearn.model_selection import train_test_split  # Para dividir los datos en entrenamiento y prueba
 
 def entrenar_y_evaluar_arbol(X_train, y_train, X_test, y_test):
     """
-    Entrena un árbol de decisión y evalúa su desempeño en un conjunto de prueba.
-    
+    Función que entrena un árbol de decisión y evalúa su desempeño.
+
     Parámetros:
-    - X_train: array de NumPy con las características de entrenamiento
-    - y_train: array de NumPy con las etiquetas de entrenamiento
-    - X_test: array de NumPy con las características de prueba
-    - y_test: array de NumPy con las etiquetas verdaderas de prueba
+    - X_train: características de entrenamiento (inputs)
+    - y_train: etiquetas de entrenamiento (lo que queremos predecir)
+    - X_test: características de prueba (inputs nuevos)
+    - y_test: etiquetas reales de prueba (para comparar con las predicciones)
     
-    Retorna:
-    - Diccionario con:
-        'predicciones': array de predicciones del modelo
-        'accuracy': precisión del modelo
-        'matriz_confusion': matriz de confusión
-        'reporte': reporte de clasificación con nombres de clases
+    Retorna un diccionario con:
+    - predicciones: lo que el modelo predijo
+    - accuracy: precisión del modelo (qué tan bien predijo)
+    - matriz_confusion: muestra errores y aciertos por clase
+    - reporte: métricas más detalladas por clase
     """
-    
-    # Nombres de las clases para el dataset Iris
+
+    # 👇 Nombres de las clases del dataset Iris
     nombres_clases = ['Setosa', 'Versicolor', 'Virginica']
-    
+
     # 1️⃣ Crear el modelo de árbol de decisión
+    # random_state=42 asegura que los resultados sean reproducibles
     modelo = DecisionTreeClassifier(random_state=42)
-    
-    # 2️⃣ Entrenar el modelo
+
+    # 2️⃣ Entrenar el modelo usando los datos de entrenamiento
+    # El modelo "aprende" la relación entre X_train y y_train
     modelo.fit(X_train, y_train)
-    
-    # 3️⃣ Hacer predicciones sobre el conjunto de prueba
-    predicciones = modelo.predict(X_test)
-    
-    # 4️⃣ Calcular métricas
-    accuracy = accuracy_score(y_test, predicciones)
-    matriz_confusion = confusion_matrix(y_test, predicciones)
-    
-    # 5️⃣ Generar reporte de clasificación con nombres de clases
+
+    # 3️⃣ Hacer predicciones sobre los datos de prueba
+    predicciones = modelo.predict(X_test)  # Devuelve un array con las clases predichas
+
+    # 4️⃣ Calcular métricas para evaluar el desempeño del modelo
+    accuracy = accuracy_score(y_test, predicciones)  # Qué porcentaje de predicciones fueron correctas
+    matriz_confusion = confusion_matrix(y_test, predicciones)  # Muestra aciertos y errores por clase
+
+    # 5️⃣ Crear un reporte más detallado
+    # Muestra precision, recall y f1-score por cada clase
+    # labels=[0,1,2] indica los índices de las clases en y_test
+    # target_names=nombres_clases reemplaza los números por nombres legibles
     reporte = classification_report(
         y_test,
         predicciones,
-        labels=[0, 1, 2],           # índices de las clases
-        target_names=nombres_clases # nombres legibles en el reporte
+        labels=[0, 1, 2],
+        target_names=nombres_clases
     )
-    
-    # 6️⃣ Devolver resultados en un diccionario
+
+    # 6️⃣ Devolver todo en un diccionario para poder usarlo fácilmente
     return {
         'predicciones': np.array(predicciones),
         'accuracy': accuracy,
         'matriz_confusion': matriz_confusion,
         'reporte': reporte
     }
+
 
 #🔹 Ejemplo de uso
 
