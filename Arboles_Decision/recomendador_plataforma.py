@@ -202,7 +202,7 @@ class PlatformRecommender:
 # ===========================
 class PlatformRecommenderVisualizer:
     @staticmethod
-    def plot_tree(recommender: PlatformRecommender):
+    def plot_tree(recommender: PlatformRecommender):   # recibe un objeto recommender (que debería ser de la clase PlatformRecommender)
         """
         Genera gráfico del árbol de decisión
         """
