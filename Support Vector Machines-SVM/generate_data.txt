@@ -1,0 +1,118 @@
+Metodos para generar datos aleatorios en Python
+
+1️⃣ random.uniform(a, b)
+
+Qué hace: Genera un número aleatorio uniforme entre a y b.
+Distribución: Todos los valores entre a y b son igualmente probables.
+
+Ejemplo de uso:
+
+import random
+x = random.uniform(0, 1)  # Valor entre 0 y 1
+
+
+Cuándo usarlo:
+Cuando quieres todas las posibilidades por igual, sin “preferencias” por valores centrales.
+
+Ejemplos:
+
+Simular tiradas de dados.
+Posiciones iniciales aleatorias de partículas.
+Colores RGB aleatorios.
+
+2️⃣ random.randint(a, b) o random.randrange(a, b)
+
+Qué hace: Genera enteros aleatorios.
+
+randint(a, b) incluye ambos extremos a y b.
+randrange(a, b) incluye a pero excluye b.
+
+Ejemplo de uso:
+
+edad = random.randint(18, 65)  # Entero entre 18 y 65
+
+Cuándo usarlo:
+
+Para contar cosas discretas.
+
+Ejemplos:
+
+Número de piezas defectuosas en una caja.
+Número de clientes que entran a una tienda.
+
+3️⃣ random.choice(seq) y random.choices(seq, k=n)
+
+Qué hace: Escoge aleatoriamente elementos de una lista.
+
+choice -> 1 elemento; choices -> varios elementos.
+
+Ejemplo de uso:
+
+color = random.choice(['rojo', 'verde', 'azul'])
+frutas = random.choices(['manzana', 'banana', 'pera'], k=5)
+
+Cuándo usarlo:
+
+Para simular decisiones discretas o categorías.
+
+Ejemplos:
+
+Etiquetas “Correcta” o “Defectuosa”.
+Simulación de rutas de clientes o elecciones aleatorias.
+
+4️⃣ random.gauss(mu, sigma) (o random.normalvariate(mu, sigma))
+
+Qué hace: Genera valores siguiendo distribución normal (campana de Gauss).
+
+Ejemplo de uso:
+
+altura = random.gauss(170, 10)  # Media 170 cm, desviación 10
+
+Cuándo usarlo:
+
+Para datos que concentran la mayoría de los valores alrededor de un promedio.
+
+Ejemplos:
+
+Dimensiones de piezas de fábrica.
+Rendimiento de estudiantes o tiempos de reacción.
+Niveles de ruido en sensores.
+
+5️⃣ Distribuciones más avanzadas (usando numpy.random)
+
+Si queremos simular datos más complejos que una sola media y desviación:
+
+numpy.random.normal(loc, scale, size) → Similar a gauss, pero vectorizado.
+numpy.random.beta(a, b, size) → Valores entre 0 y 1, útil para proporciones.
+numpy.random.poisson(lam, size) → Valores enteros según eventos raros (ej: defectos por unidad).
+numpy.random.exponential(scale, size) → Para tiempos entre eventos (como fallas).
+
+Ejemplos prácticos:
+
+Distribución	   Ejemplo de aplicación
+Normal (gauss)	   Peso de piezas, altura de personas
+Uniforme	       Generar colores aleatorios, posiciones iniciales
+Poisson	           Número de fallas por hora en máquina
+Exponencial	       Tiempo hasta falla de un sensor
+Beta	           Probabilidades de éxito en ensayos
+
+💡 Resumen práctico para tu caso de piezas industriales:
+
+gauss → ideal para medidas físicas continuas con ruido natural (textura, simetría, offset).
+uniform → si quieres simular valores completamente aleatorios sin concentración central.
+choice → para etiquetas discretas (Correcta/Defectuosa).
+randint → para cantidad de bordes o elementos discretos.
+
+
+*** poisson ***
+
+| Ejemplo                                      | Explicación                                                                                               |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Número de fallas de máquinas por hora        | Si una máquina falla en promedio 2 veces por hora, el número real puede variar: 0, 1, 2, 3…               |
+| Llamadas a un call center por minuto         | Si el promedio son 5 llamadas por minuto, algunas veces hay 3, otras 7, etc.                              |
+| Llegadas de clientes a una tienda            | Promedio de clientes por hora: la variación real sigue Poisson.                                           |
+| Accidentes de tráfico en una intersección    | Si hay un promedio de 1 accidente por semana, algunos semanas pueden no haber ninguno y otras más de uno. |
+| Correos electrónicos que llegan a tu bandeja | Promedio de 10 correos por hora: la cantidad real es variable.                                            |
+| Número de errores tipográficos en un libro   | Si hay un promedio de 1 error por 100 páginas, algunas páginas tendrán 0 y otras 2.                       |
+| Mutaciones genéticas en un fragmento de ADN  | Si en promedio ocurre 1 mutación cada 1000 nucleótidos, el número real es variable.                       |
+| Llegadas de buses a una parada               | Promedio de 3 buses por hora, pero pueden llegar 2 o 4 en un momento dado.                                |
