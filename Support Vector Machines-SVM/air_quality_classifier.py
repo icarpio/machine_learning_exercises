@@ -242,7 +242,6 @@ class AirQualityExample:
 
         # Creamos el objeto AirSample con los valores ingresados
         new_sample = AirSample(pm25=pm25, pm10=pm10, o3=o3, no2=no2)
-
         """
 
         # 3️⃣ Creamos una nueva muestra de aire para probar el modelo
@@ -259,7 +258,6 @@ class AirQualityExample:
             print("✅ Predicción de calidad: Saludable ✅")
         else:
             print("⚠️ Predicción de calidad: Contaminado ⚠️")
-
 
 # ==============================================================
 # 🚀 EJECUCIÓN DEL EJEMPLO
