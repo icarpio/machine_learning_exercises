@@ -29,7 +29,6 @@ Manzana: peso entre 120–200g, tamaño entre 7–9cm
 Plátano: peso entre 100–150g, tamaño entre 12–20cm
 Naranja: peso entre 150–250g, tamaño entre 8–12cm
 
-
 2. Crear la clase ClasificadorFrutas
 
 Entrena un modelo KNN y permite hacer predicciones:
@@ -64,13 +63,11 @@ Salida esperada
 🍎 La fruta predicha para peso=140g y tamaño=18cm es: Plátano
     
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
 
 
 # ============================================================
@@ -147,8 +144,6 @@ class ClasificadorFrutas:
         entrada = np.array([[peso, tamaño]])
         return self.modelo.predict(entrada)[0]
 
-
-
 # ============================================================
 # 3. CLASE VisualizadorFrutas
 # ============================================================
@@ -173,8 +168,6 @@ class VisualizadorFrutas:
         plt.legend()
         plt.grid(True)
         plt.show()
-
-
 
 # ============================================================
 # 4. CLASE PRINCIPAL SimuladorFrutas
@@ -203,8 +196,6 @@ class SimuladorFrutas:
 
         visual = VisualizadorFrutas()
         visual.graficar(X, y, "Clasificación de 8 Frutas Simuladas")
-
-
 
 # ============================================================
 # EJECUCIÓN DIRECTA
