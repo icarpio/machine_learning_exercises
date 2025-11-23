@@ -1,6 +1,29 @@
-##############################################################
+
+
+"""
+Cluster 0: 💎🛒 Compradores Premium / High-spenders
+- Gastan mucho cada mes
+- Visitan la tienda con frecuencia
+- Compran marcas caras y productos impulsivos
+Ej: Luis, Hugo, Diego, Raúl
+
+Cluster 1: 🟢🛍 Compradores Moderados / Estables
+- Gasto intermedio
+- Visitas regulares
+- Compras equilibradas, pocas impulsivas
+Ej: Ana, Marta, Patricia, Teresa, Sofía, Jorge, Valeria
+
+Cluster 2: 🐢💰 Compradores Ahorra-dores / Low-spenders
+- Gastan poco cada mes
+- Van pocas veces
+- Compras racionales, casi nada impulsivas
+Ej: Lucía, Bruno, Elena
+"""
+
+
+
 #  CUSTOMER ANALYTICS – CLUSTERING DE CLIENTES
-##############################################################
+
 
 from sklearn.cluster import KMeans
 import numpy as np

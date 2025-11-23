@@ -39,6 +39,12 @@ Marketing y productos
 Clasificar productos similares para recomendación.
 Detección de anomalías
 Encontrar datos que no encajan en ningún grupo (outliers).    
+
+
+Cluster 0: 🚗🚀 deportivos y agresivos
+Cluster 1: ⚡ eco y tranquilos
+Cluster 2: 🚙 uso diario promedio
+
 """
 
 ##############################################################
