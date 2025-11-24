@@ -232,7 +232,6 @@ class EjecutarSimulacion:
         nuevas_series = generador.generar_series(100)
 
         df_nuevas = pd.DataFrame(nuevas_series, columns=[f"N{i+1}" for i in range(6)])
-
         # predecir probabilidades
         probabilidades = modelo.predecir_probabilidades(df_nuevas.values)
 
